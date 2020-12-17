@@ -123,7 +123,7 @@ void draw_OuterSquare(int x0, int y0, int w, int h, int outWidth, int innerWidth
 {
     if (h < outWidth || w < outWidth)
     {
-        printf("draw_OuterSquare 参数有error\n");
+        printf("draw_OuterSquare args error\n");
         return;
     }
     //行
@@ -144,7 +144,7 @@ void draw_InnerSquare(int x0, int y0, int w, int h, int innerWidth, int color, i
 {
     if (h < innerWidth || w < innerWidth)
     {
-        printf("draw_InnerSquare 参数有error\n");
+        printf("draw_InnerSquare arg error\n");
         return;
     }
     int x, y;

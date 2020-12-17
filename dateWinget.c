@@ -217,11 +217,11 @@ void DateWiget(struct Point *point,int *smoke,struct GY39Date *gy39date,int *des
         if(smo!=*smoke||gy39date->temperature!=tem||gy39date->humidity!=hum
                 ||gy39date->pressure!=pre||gy39date->altitude!=alt) //数据有变才更新
         {
-            printf("烟雾浓度：%d，",*smoke);
+            //printf("烟雾浓度：%d，",*smoke);
             //烟雾浓度
             draw_orth(350,88,112,20,0x00ffffff,des);
             lcd_draw_Num(350,88,16,19,*smoke,0x0010489c,des);
-            printf("温度：%d,湿度：%d,气压:%d,海拔:%d\n",gy39date->temperature,gy39date->humidity,gy39date->pressure,gy39date->altitude);
+            //printf("温度：%d,湿度：%d,气压:%d,海拔:%d\n",gy39date->temperature,gy39date->humidity,gy39date->pressure,gy39date->altitude);
             //温度
             draw_orth(140,220,112,20,0x00ffffff,des);
             lcd_draw_Num(140,220,16,19,gy39date->temperature,0x0010489c,des);

@@ -133,20 +133,22 @@ void *getGY39Date(void *arg) {
     //单独测试温度，湿度，气压，海拔，返回15字节
     unsigned char cmd3[3] = {0xA5, 0x52, 0xF7};
     unsigned char buf[24] = {0};
-    Write(gy39_fd, cmd3, 3);
-    while (1) {
-        Read(gy39_fd, buf, 15);
-        if (buf[0] == 0x5a && buf[1] == 0x5a && buf[2] == 0x45) {
-            gy39Date->temperature = buf[4] << 8 | buf[5];
-            gy39Date->pressure =
-                buf[6] << 24 | buf[7] << 16 | buf[8] << 8 | buf[9];
-            gy39Date->humidity = buf[10] << 8 | buf[11];
-            gy39Date->altitude = buf[12] << 8 | buf[13];
-        } else {
-            perror("------------GY39 read error\n");
-            exit(-1);
-        }
 
+    while (1) {
+        if (Write(gy39_fd, cmd3, 3) == 3) {
+            Read(gy39_fd, buf, 15);
+            for (int i = 0; i < 15; i++) {
+                printf("%d:%x ", i, buf[i]);
+            }
+            printf("\n");
+            if (buf[0] == 0x5a && buf[1] == 0x5a && buf[2] == 0x45) {
+                gy39Date->temperature = (buf[4] << 8 | buf[5]) / 100;
+                gy39Date->pressure =
+                    (buf[6] << 24 | buf[7] << 16 | buf[8] << 8 | buf[9]) / 100;
+                gy39Date->humidity = (buf[10] << 8 | buf[11]) / 100;
+                gy39Date->altitude = (buf[12] << 8 | buf[13]) / 100;
+            }
+        }
         sleep(2);
     }
 }
